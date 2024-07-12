@@ -5,18 +5,19 @@ import { HelpCircleOutline as HelpIcon } from '@vicons/ionicons5'
 import { ref } from 'vue'
 import type { IFormValue } from '@/components/UserForm/userForm.types'
 
+const emits = defineEmits(['onSubmit'])
 const searchFormRef = ref<FormInst | null>()
 const formValue = ref<IFormValue>({
-  email: null,
-  phone: null
+  email: '',
+  phone: ''
 })
 
-const validatePhoneNumber = (rule: FormItemRule, value: string) => {
+const validatePhoneNumber = (_: FormItemRule, value: string) => {
   if (!value) return true
   if (value.length !== 8) return false
 }
 
-const validateEmail = (rule: FormItemRule, value: string) => {
+const validateEmail = (_: FormItemRule, value: string) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailPattern.test(value)
 }
@@ -39,7 +40,7 @@ const rules = {
 const handleSubmit = () => {
   searchFormRef.value?.validate(async (err) => {
     if (!err) {
-      console.log('he')
+      emits('onSubmit', formValue.value)
     }
   })
 }
@@ -53,6 +54,7 @@ function formatNumber(value: string) {
 
 <template>
   <n-card class="search-form">
+    <pre>{{formValue}}</pre>
     <n-form ref="searchFormRef" :model="formValue" :rules="rules" @submit.prevent="handleSubmit">
       <n-form-item label="Email" path="email" required>
         <n-input
@@ -94,7 +96,7 @@ function formatNumber(value: string) {
           </template>
         </n-input>
       </n-form-item>
-      <n-divider style="margin-top: 0"/>
+      <n-divider style="margin-top: 0" />
       <n-row>
         <n-button attr-type="submit" block type="primary">Submit</n-button>
       </n-row>
