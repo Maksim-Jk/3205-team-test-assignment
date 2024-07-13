@@ -1,0 +1,14 @@
+version: "3.8"  # Specify the docker-compose version
+
+services:
+  frontend:
+    build: ./frontend  # Path to your frontend Dockerfile
+    ports:
+      - "3000:80"  # Expose frontend port 80 to host port 80
+    depends_on:
+      - backend  # Frontend waits for backend to be ready
+
+  backend:
+    build: ./backend  # Path to your backend Dockerfile
+    ports:
+      - "8000:8000"  # Expose frontend port 80 to host port 80
