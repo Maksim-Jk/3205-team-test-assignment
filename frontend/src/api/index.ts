@@ -9,7 +9,7 @@ const { notification } = createDiscreteApi(
 export const useApi = () => {
   if (api === null) {
     api = ofetch.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL,
+      baseURL: 'http://localhost:8000/api',
       onResponseError(ctx) {
         notification.error({
           title: 'Error',
