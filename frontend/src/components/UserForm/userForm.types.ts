@@ -1,4 +1,4 @@
 export interface IFormValue {
   email: string
-  phone: string
+  number: string
 }

@@ -14,8 +14,6 @@ import FormView from './views/FormView/index.vue'
 
 <style lang="scss" scoped>
 .n-layout {
-  position: relative;
-  height: 100vh;
-  padding: 30px;
+  padding: 20px;
 }
 </style>

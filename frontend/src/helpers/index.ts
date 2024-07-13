@@ -1,3 +1,3 @@
-export const transformPhoneToNumber = (phone: string) => {
-  return phone.replace(/-/g, '')
+export const transformPhoneToNumber = (number: string) => {
+  return number.replace(/-/g, '')
 }

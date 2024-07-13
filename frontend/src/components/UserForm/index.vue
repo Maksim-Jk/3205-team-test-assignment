@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { FormInst, FormItemRule } from 'naive-ui'
+import { type FormInst, type FormItemRule, NH2 } from 'naive-ui'
 import { NButton, NCard, NDivider, NForm, NFormItem, NIcon, NInput, NRow, NTooltip } from 'naive-ui'
 import { HelpCircleOutline as HelpIcon } from '@vicons/ionicons5'
 import { ref } from 'vue'
@@ -9,7 +9,7 @@ const emits = defineEmits(['onSubmit'])
 const searchFormRef = ref<FormInst | null>()
 const formValue = ref<IFormValue>({
   email: '',
-  phone: ''
+  number: ''
 })
 
 const validatePhoneNumber = (_: FormItemRule, value: string) => {
@@ -28,7 +28,7 @@ const rules = {
     message: 'Incorrect email',
     validator: validateEmail
   },
-  phone: {
+  number: {
     required: false,
     length: 8,
     validator: validatePhoneNumber,
@@ -48,13 +48,13 @@ const handleSubmit = () => {
 function formatNumber(value: string) {
   let cleaned = value.replace(/\D/g, '')
   let formated = cleaned.replace(/(\d{2})(?=\d)/g, '$1-')
-  formValue.value.phone = formated.substring(0, 8)
+  formValue.value.number = formated.substring(0, 8)
 }
 </script>
 
 <template>
   <n-card class="search-form">
-    <pre>{{formValue}}</pre>
+    <n-h2>User form</n-h2>
     <n-form ref="searchFormRef" :model="formValue" :rules="rules" @submit.prevent="handleSubmit">
       <n-form-item label="Email" path="email" required>
         <n-input
@@ -70,14 +70,14 @@ function formatNumber(value: string) {
                   <help-icon />
                 </n-icon>
               </template>
-              <span>Email should be in format of example@example.com</span>
+              <span>Email should be in format of example@example.example</span>
             </n-tooltip>
           </template>
         </n-input>
       </n-form-item>
-      <n-form-item first label="Phone" path="phone">
+      <n-form-item first label="Phone" path="number">
         <n-input
-          :value="formValue.phone"
+          :value="formValue.number"
           clearable
           maxlength="8"
           placeholder="Please input phone"
@@ -105,9 +105,5 @@ function formatNumber(value: string) {
 </template>
 
 <style lang="scss" scoped>
-.search-form {
-  max-width: 600px;
-  margin: auto;
-  transform: translateY(50%);
-}
+
 </style>
