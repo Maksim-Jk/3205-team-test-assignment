@@ -1,9 +1,9 @@
-export interface IFetchUserRequest {
+export interface IFetchUsersListRequest {
   email: string
   number: string
 }
 
-export interface IFetchUserResponse {
+export interface IUserItem{
   email: string
   number: string
 }

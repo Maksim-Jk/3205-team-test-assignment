@@ -4,17 +4,36 @@ import type { IProps } from '@/components/UserData/userData.types'
 import { defineProps } from 'vue'
 
 defineProps<IProps>()
+
+const tr = (number: string) => {
+  return number.replace(/(\d{2})(?=\d)/g, '$1-')
+
+}
 </script>
 
 <template>
-  <n-card >
+  <n-card>
     <n-h2>User data</n-h2>
     <n-spin :show="isLoading" size="large">
-      <n-descriptions v-if="user" :columns="1" bordered label-class="label" label-placement="left">
-        <n-descriptions-item label="Email">{{ user.email }}</n-descriptions-item>
-        <n-descriptions-item label="Number">{{ user.number}}</n-descriptions-item>
-      </n-descriptions>
-      <n-empty v-if="!user" description="User data not found" />
+      <n-space v-if="usersList?.length">
+        <n-descriptions
+          :columns="1"
+          bordered
+          label-class="label"
+          label-placement="left">
+          <n-descriptions-item
+            label="Email">{{ usersList[0].email }}
+          </n-descriptions-item>
+          <n-descriptions-item
+            v-for="(user, i) in usersList"
+            :key="i"
+            :label="usersList.length === 1 ? 'Phone number' : `Phone number ${i + 1}`"
+          >
+            {{ tr(user.number) }}
+          </n-descriptions-item>
+        </n-descriptions>
+      </n-space>
+      <n-empty v-if="!usersList?.length" description="User data not found" />
     </n-spin>
   </n-card>
 </template>

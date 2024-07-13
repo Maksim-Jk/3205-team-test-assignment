@@ -1,6 +1,6 @@
-import type { IFetchUserResponse } from '@/api/user/user.types'
+import type { IUserItem } from '@/api/user/user.types'
 
 export interface IProps {
-  user: IFetchUserResponse | null
+  usersList: IUserItem[] | null
   isLoading: boolean
 }

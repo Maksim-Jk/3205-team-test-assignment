@@ -103,7 +103,3 @@ function formatNumber(value: string) {
     </n-form>
   </n-card>
 </template>
-
-<style lang="scss" scoped>
-
-</style>

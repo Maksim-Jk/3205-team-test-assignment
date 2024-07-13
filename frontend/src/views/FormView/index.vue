@@ -4,22 +4,22 @@ import UserData from '@/components/UserData/index.vue'
 import { NSpace } from 'naive-ui'
 import type { IFormValue } from '@/components/UserForm/userForm.types'
 import { ref } from 'vue'
-import { fetchUser } from '@/api/user/user'
-import type { IFetchUserResponse } from '@/api/user/user.types'
+import { fetchUsersList } from '@/api/user/user'
+import type { IUserItem } from '@/api/user/user.types'
 
 const handleSubmit = async (value: IFormValue) => {
   isLoading.value = true
-  user.value = await fetchUser(value)
+  usersList.value = await fetchUsersList(value) || []
   isLoading.value = false
 }
 const isLoading = ref(false)
-const user = ref<IFetchUserResponse | null>(null)
+const usersList = ref<IUserItem[]>([])
 </script>
 
 <template>
   <n-space vertical>
     <UserForm @onSubmit="handleSubmit" />
-    <UserData :is-loading="isLoading" :user="user" />
+    <UserData :is-loading="isLoading" :users-list="usersList" />
   </n-space>
 </template>
 

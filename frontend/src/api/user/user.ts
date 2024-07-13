@@ -1,11 +1,11 @@
 import { useApi } from '@/api'
 import { transformPhoneToNumber } from '@/helpers'
-import type { IFetchUserRequest, IFetchUserResponse } from '@/api/user/user.types'
+import type { IFetchUsersListRequest, IUserItem } from '@/api/user/user.types'
 
 const api = useApi()
 
-export const fetchUser = (query?: IFetchUserRequest) => {
-  return api<IFetchUserResponse | null>('/user/', {
+export const fetchUsersList = (query?: IFetchUsersListRequest) => {
+  return api<IUserItem[]>('/user/', {
     method: 'GET',
     query: {
       email: query?.email,
