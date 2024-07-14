@@ -15,9 +15,10 @@ import {
 } from 'naive-ui'
 import { HelpCircleOutline as HelpIcon } from '@vicons/ionicons5'
 import { ref } from 'vue'
-import type { IFormValue } from '@/components/UserForm/userForm.types'
+import type { IFormValue, IProps } from '@/components/UserForm/userForm.types'
 import { prettifyPhoneNumber } from '@/helpers'
 
+defineProps<IProps>()
 const emits = defineEmits(['onSubmit'])
 const searchFormRef = ref<FormInst | null>()
 const formValue = ref<IFormValue>({
@@ -66,7 +67,13 @@ const handleInput = (value: string) => {
 <template>
   <n-card class="search-form">
     <n-h2>User form</n-h2>
-    <n-form ref="searchFormRef" :model="formValue" :rules="rules" @submit.prevent="handleSubmit">
+    <n-form
+      ref="searchFormRef"
+      :disabled="isLoading"
+      :model="formValue"
+      :rules="rules"
+      @submit.prevent="handleSubmit"
+    >
       <n-form-item label="Email" path="email" required>
         <n-input
           v-model:value="formValue.email"

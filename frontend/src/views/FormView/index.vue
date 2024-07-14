@@ -18,7 +18,7 @@ const usersList = ref<IUserItem[]>([])
 
 <template>
   <n-space vertical>
-    <UserForm @onSubmit="handleSubmit" />
+    <UserForm :is-loading="isLoading" @onSubmit="handleSubmit" />
     <UserData :is-loading="isLoading" :users-list="usersList" />
   </n-space>
 </template>
