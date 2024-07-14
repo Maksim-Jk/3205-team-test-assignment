@@ -2,13 +2,10 @@
 import { NCard, NDescriptions, NDescriptionsItem, NEmpty, NH2, NSpin } from 'naive-ui'
 import type { IProps } from '@/components/UserData/userData.types'
 import { defineProps } from 'vue'
+import { prettifyPhoneNumber } from '@/helpers'
 
 defineProps<IProps>()
 
-const tr = (number: string) => {
-  return number.replace(/(\d{2})(?=\d)/g, '$1-')
-
-}
 </script>
 
 <template>
@@ -29,7 +26,7 @@ const tr = (number: string) => {
             :key="i"
             :label="usersList.length === 1 ? 'Phone number' : `Phone number ${i + 1}`"
           >
-            {{ tr(user.number) }}
+            {{ prettifyPhoneNumber(user.number) }}
           </n-descriptions-item>
         </n-descriptions>
       </n-space>

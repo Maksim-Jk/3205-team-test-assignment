@@ -22,5 +22,3 @@ const usersList = ref<IUserItem[]>([])
     <UserData :is-loading="isLoading" :users-list="usersList" />
   </n-space>
 </template>
-
-<style lang="scss" scoped></style>
