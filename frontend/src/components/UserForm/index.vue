@@ -1,9 +1,22 @@
 <script lang="ts" setup>
-import { type FormInst, type FormItemRule, NH2 } from 'naive-ui'
-import { NButton, NCard, NDivider, NForm, NFormItem, NIcon, NInput, NRow, NTooltip } from 'naive-ui'
+import {
+  type FormInst,
+  type FormItemRule,
+  NButton,
+  NCard,
+  NDivider,
+  NForm,
+  NFormItem,
+  NH2,
+  NIcon,
+  NInput,
+  NRow,
+  NTooltip
+} from 'naive-ui'
 import { HelpCircleOutline as HelpIcon } from '@vicons/ionicons5'
 import { ref } from 'vue'
 import type { IFormValue } from '@/components/UserForm/userForm.types'
+import { prettifyPhoneNumber } from '@/helpers'
 
 const emits = defineEmits(['onSubmit'])
 const searchFormRef = ref<FormInst | null>()
@@ -45,10 +58,8 @@ const handleSubmit = () => {
   })
 }
 
-function formatNumber(value: string) {
-  let cleaned = value.replace(/\D/g, '')
-  let formated = cleaned.replace(/(\d{2})(?=\d)/g, '$1-')
-  formValue.value.number = formated.substring(0, 8)
+const handleInput = (value: string) => {
+  formValue.value.number = prettifyPhoneNumber(value)
 }
 </script>
 
@@ -82,7 +93,7 @@ function formatNumber(value: string) {
           maxlength="8"
           placeholder="Please input phone"
           type="text"
-          @input="formatNumber"
+          @input="handleInput"
         >
           <template #suffix>
             <n-tooltip>

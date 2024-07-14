@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { NLayout } from 'naive-ui'
 import FormView from './views/FormView/index.vue'
-// import UserList from './components/UserList/index.vue'
 </script>
 
 <template>
@@ -15,5 +14,7 @@ import FormView from './views/FormView/index.vue'
 <style lang="scss" scoped>
 .n-layout {
   padding: 20px;
+  max-width: 600px;
+  margin: auto;
 }
 </style>
